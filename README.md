@@ -76,9 +76,7 @@ uvicorn main:app --reload
 
 ```plaintext
 Microservices/
-├── venv/               # Virtual environment folder
 ├── main.py             # FastAPI application code
-├── test_main.py        # Unit tests for API
 ├── Dockerfile          # Docker configuration for containerizing the app
 ├── requirements.txt    # Dependency list (if using pip freeze)
 └── README.md           # Project documentation
