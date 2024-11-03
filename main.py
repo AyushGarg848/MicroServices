@@ -7,12 +7,12 @@ app = FastAPI()
 
 # route for the root URL "/"
 @app.get("/")
-def root():
+def root() -> dict:
     return {"message": "Hello World!!"}
 
 # route for the URL "/roll-dice"
 @app.get("/roll-dice")
-def roll_dice():
+def roll_dice() -> dict:
     # to Generate a random integer between 1 and 6
     dice_value = random.randint(1, 6)
     return {"value": dice_value}
