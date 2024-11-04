@@ -1,14 +1,11 @@
 # Microservices with FastAPI
 
-This repository demonstrates how to create a basic microservice using FastAPI, packaged with Docker for consistent deployment. The microservice includes two simple API endpoints and provides instructions for running it locally and in a Docker container.
-
+This repository demonstrates how to create a basic microservice using FastAPI, packaged with Docker for consistent deployment. The microservice includes a simple API endpoint and provides instructions for running it locally and in a Docker container.
 
 ## Project Overview
 
-This microservice offers two endpoints:
+This microservice offers an endpoint:
 - **Root Endpoint** (`/`) - Returns a "Hello World" message.
-- **Roll Dice Endpoint** (`/roll-dice`) - Simulates rolling a 6-sided die and returns a random integer between 1 and 6.
-
 
 ## Setup and Installation
 
@@ -71,17 +68,24 @@ uvicorn main:app --reload
 - **Access the API**:
   - Open [http://localhost:8000/docs](http://localhost:8000/docs) to view the documentation from within the Docker container.
 
-
 ## Project Structure
 
 ```plaintext
 Microservices/
-├── main.py             # FastAPI application code
-├── Dockerfile          # Docker configuration for containerizing the app
-├── requirements.txt    # Dependency list (if using pip freeze)
-└── README.md           # Project documentation
+├── app
+│   ├── __init__.py
+│   ├── main.py
+│   ├── dependencies.py
+│   └── routers
+│   │   ├── __init__.py
+│   │   ├── items.py
+│   │   └── users.py
+├── Dockerfile
+├── README.md
+├── requirements.txt
+├── test_main.py
+└── .gitignore
 ```
-
 
 ## Contact
 
