@@ -1,5 +1,5 @@
-# Using an official Python 3.9 image as the base
-FROM python:3.9-slim
+# Using an official Python 3.11 image as the base
+FROM python:3.11-slim
 
 # Sets the working directory inside the container
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY ./app ./app
 
 # Expose port 8000 for the app to run
-EXPOSE 8000
+EXPOSE 80
 
 # Command that starts the Uvicorn server when the container runs
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]

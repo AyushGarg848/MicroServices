@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routers import items, users
+from .routers import items, users, models
 
 app = FastAPI()
 
@@ -13,3 +13,4 @@ async def read_file(file_path: str):
 
 app.include_router(items.router)
 app.include_router(users.router)
+app.include_router(models.router)

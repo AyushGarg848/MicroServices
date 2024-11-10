@@ -1,11 +1,16 @@
 # Microservices with FastAPI
 
-This repository demonstrates how to create a basic microservice using FastAPI, packaged with Docker for consistent deployment. The microservice includes a simple API endpoint and provides instructions for running it locally and in a Docker container.
+This repository demonstrates how to create a basic microservice using FastAPI, packaged with Docker for consistent deployment. The microservice includes multiple API endpoints and provides instructions for running it locally and in a Docker container.
 
 ## Project Overview
 
-This microservice offers an endpoint:
+This microservice offers the following endpoints:
+
 - **Root Endpoint** (`/`) - Returns a "Hello World" message.
+- **File Endpoint** (`/files/{file_path:path}`) - Returns the path of a file.
+- **Items Endpoints** (`/items/`, `/items/{item_id}`) - Retrieve items, create new items, and update existing items.
+- **Users Endpoints** (`/users/me`, `/users/{user_id}/items/{item_id}`) - Retrieve user details and user-specific items.
+- **Models Endpoint** (`/models/{model_name}`) - Retrieve messages for specific model names.
 
 ## Setup and Installation
 
@@ -37,9 +42,8 @@ cd Microservices
 Once the virtual environment is activated, install the required dependencies:
 
 ```bash
-pip install fastapi uvicorn
+pip install fastapi uvicorn pydantic
 ```
-
 
 ## Running the Application
 
@@ -48,7 +52,7 @@ pip install fastapi uvicorn
 Start the FastAPI server locally:
 
 ```bash
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 - **Access the API Documentation**:
@@ -62,7 +66,7 @@ uvicorn main:app --reload
    ```
 2. **Run Docker Container**:
    ```bash
-   docker run -p 8000:8000 fastapi-app
+   docker run -p 8000:80 fastapi-app
    ```
 
 - **Access the API**:
@@ -75,15 +79,14 @@ Microservices/
 ├── app
 │   ├── __init__.py
 │   ├── main.py
-│   ├── dependencies.py
 │   └── routers
 │   │   ├── __init__.py
 │   │   ├── items.py
 │   │   └── users.py
+│   │   └── models.py
 ├── Dockerfile
 ├── README.md
 ├── requirements.txt
-├── test_main.py
 └── .gitignore
 ```
 
