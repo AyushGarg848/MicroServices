@@ -1,8 +1,19 @@
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Cookie, Depends
 from typing import Annotated
 from pydantic import BaseModel
 
 router = APIRouter()
+
+def query_extractor(q: str | None = None):
+    return q
+
+def query_or_cookie_extractor(
+    q: Annotated[str, Depends(query_extractor)],
+    last_query: Annotated[str | None, Cookie()] = None,
+):
+    if not q:
+        return last_query
+    return q
 
 class Item(BaseModel):
     name: str
@@ -10,13 +21,19 @@ class Item(BaseModel):
     price: float
     tax: float | None = None
 
+# @router.get("/items/")
+# async def read_items(
+#     q: Annotated[str | None, Query(min_length=3, max_length=50, pattern="^fixed query$")] = None):
+#     results = {"items": ["Foo", "Bar"]}
+#     if q:
+#         results.update({"q": q})
+#     return results
+
 @router.get("/items/")
-async def read_items(
-    q: Annotated[str | None, Query(min_length=3, max_length=50, pattern="^fixed query$")] = None):
-    results = {"items": ["Foo", "Bar"]}
-    if q:
-        results.update({"q": q})
-    return results
+async def read_query(
+    query_or_default: Annotated[str, Depends(query_or_cookie_extractor)],
+):
+    return {"q_or_cookie": query_or_default}
 
 @router.get("/items/{item_id}")
 async def read_item(item_id: str, q: str | None = None, short: bool = False):
